@@ -1,0 +1,78 @@
+﻿<Window x:Class="GenToolsForWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GenToolsForWpf"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Title="GenProcess" Height="350" Width="525" Background="#FF007ACC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" WindowStyle="ToolWindow">
+    <Grid Margin="1,30,1,1">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+
+        <Grid x:Name="PciGroup" Height="55" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="174,26,197,0" Width="144">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <Label Name="Spci" Content="源PCI:" Margin="1,1,10,1" RenderTransformOrigin="0,0.52" Height="25" VerticalAlignment="Bottom" Grid.Column="0" Foreground="White" BorderBrush="Black"/>
+            <TextBox x:Name="txbSourcePci" Width="70" HorizontalAlignment="Right" RenderTransformOrigin="0.601,0.533" Height="25" VerticalAlignment="Bottom" BorderBrush="Black" Grid.ColumnSpan="2" Margin="0,0,2,0"/>
+            <Label Name="Npci" Content="新PCI:" Margin="1,1,10,1" RenderTransformOrigin="0,0.52" Height="25" VerticalAlignment="Bottom"
+                 Grid.Row="1" Grid.Column="0" Foreground="White"/>
+            <TextBox x:Name="txbNewPci" Width="70" HorizontalAlignment="Right" RenderTransformOrigin="0.601,0.533" Height="25" VerticalAlignment="Bottom"
+                    Grid.Row="1" BorderBrush="Black" Margin="0,0,2,0" Grid.ColumnSpan="2"/>
+            
+        </Grid>
+
+        <Grid x:Name="GridButton" Margin="355,26,0,0" Height="auto"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="67"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="67"/>
+                <ColumnDefinition Width="3"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,3,3" CornerRadius="1" >
+                <Button x:Name="btnOpenFile" Content="打开文件"   Background="#FF007ACC"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="btnOpenFile_Click" Foreground="White"  BorderBrush="Black" Height="21" VerticalAlignment="Top"/>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1,1,3,3" CornerRadius="1" >
+                <Button x:Name="btnClose" Content="关闭软件"   Background="#FF007ACC"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"  BorderBrush="Black" Click="btnClose_Click"/>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,3,3" CornerRadius="1" >
+                <Button x:Name="btnRun" Content="运行"   Background="#FF007ACC" BorderBrush="Black" Foreground="White" Click="btnRun_Click"></Button>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="1,1,3,3" CornerRadius="1" >
+                <Button Name="btnOpendir" Content="打开目录" Click="btnOpendir_Click" Background="#FF007ACC" BorderBrush="Black" Foreground="White"></Button>
+            </Border>
+        </Grid>
+
+        <Grid Margin="0,111,0,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                <Label Name="LbLog"  Content="日志：" Foreground="White" />
+            </Border>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" CornerRadius="1" Margin="0,2,0,0">
+                <TextBox Name="txbLog" AutoWordSelection="True"  Margin="0"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
