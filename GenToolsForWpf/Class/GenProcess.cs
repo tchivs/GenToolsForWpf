@@ -29,8 +29,13 @@ namespace GenToolsForWpf.Class
         public GenProcess(AddLogDelegate appendLog)
         {
             this._appendLog = appendLog;
-            this.Filenames=  FileHelper.OpenFile();
-            ShowFileName();
+            this.Filenames = FileHelper.OpenFile();
+            if (string.IsNullOrEmpty(Filenames[0]))
+            {
+                ShowFileName();
+
+            }
+
         }
 
         /// <summary>
@@ -40,7 +45,7 @@ namespace GenToolsForWpf.Class
         {
             foreach (string item in Filenames)
             {
-              _appendLog(Path.GetFileName(item));
+                _appendLog(Path.GetFileName(item));
             }
         }
 
@@ -88,17 +93,17 @@ namespace GenToolsForWpf.Class
         /// <param name="i"></param>
         private void SaveData(int i)
         {
-          string name=Path.GetFileName(Filenames[i]);
+            string name = Path.GetFileName(Filenames[i]);
             if (name.Contains(pcihelper.OldPciStr))
             {
-                name =filePath + @"\" + name.Replace(pcihelper.OldPciStr, pcihelper.NewPciStr);
+                name = filePath + @"\" + name.Replace(pcihelper.OldPciStr, pcihelper.NewPciStr);
             }
             else
             {
-                name= filePath + "PCI-" + pcihelper.OldPciStr + name;
+                name = filePath + "PCI-" + pcihelper.OldPciStr + name;
             }
             FileHelper.Save(name, datalist[i]);
-            _appendLog("Save to\t"+Path.GetFileName( name)+"\n");
+            _appendLog("Save to\t" + Path.GetFileName(name) + "\n");
         }
 
         /// <summary>
@@ -107,7 +112,7 @@ namespace GenToolsForWpf.Class
         /// <param name="data"></param>
         private void GetNewDate(StringBuilder data)
         {
-            data.Replace("F04E" +pcihelper.OldPciHex, "F04E" + pcihelper.NewPciHex);           
+            data.Replace("F04E" + pcihelper.OldPciHex, "F04E" + pcihelper.NewPciHex);
             //存放数据
             List<string> list = new List<string>();
             Regex reg = new Regex(@"11[0-9a-fA-F]." + pcihelper.OldPciHex);
@@ -123,7 +128,7 @@ namespace GenToolsForWpf.Class
             {
                 data.Replace(item, item.Substring(0, 4) + pcihelper.NewPciHex);
             }
-        
+
             for (int k = 0; k <= 5; k++)
             {
                 data.Replace("0" + k + "00" + pcihelper.OldPciHex, "0" + k + "00" + pcihelper.NewPciHex);
