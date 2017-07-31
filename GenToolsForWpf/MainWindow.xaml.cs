@@ -29,11 +29,11 @@ namespace GenToolsForWpf
         public MainWindow()
         {
             InitializeComponent();
-           
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
+            txbLog.Clear();
             gp = new GenProcess(AppendLog);
             txbSourcePci.Text=
             PciHelper.GetPci(gp.Filenames[0]);
@@ -62,6 +62,7 @@ namespace GenToolsForWpf
         {
             if (IsCanWork)
             {
+                txbLog.Clear();
                 int sourcePci = Convert.ToInt32(txbSourcePci.Text);
                 int newpci = Convert.ToInt32(txbNewPci.Text);
                 pci = new PciHelper(sourcePci, newpci);

@@ -98,7 +98,7 @@ namespace GenToolsForWpf.Class
                 name= filePath + "PCI-" + pcihelper.OldPciStr + name;
             }
             FileHelper.Save(name, datalist[i]);
-            _appendLog("Save to\t"+name+"\n");
+            _appendLog("Save to\t"+Path.GetFileName( name)+"\n");
         }
 
         /// <summary>
