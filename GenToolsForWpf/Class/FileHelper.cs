@@ -56,7 +56,7 @@ namespace GenToolsForWpf.Class
         public static void Save(string path, StringBuilder s)
         {
             byte[] buffer = HexConvert.HexStringToByteArray(s.ToString());
-            using (FileStream fs=new FileStream(path, FileMode.CreateNew, FileAccess.Write))
+            using (FileStream fs=new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 fs.Write(buffer, 0, buffer.Length);
             }

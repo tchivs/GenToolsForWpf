@@ -1,23 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GenToolsForWpf.Class;
 
 namespace GenToolsForWpf
 {
- 
+
     public delegate void AddLogDelegate(string s);
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -29,7 +17,7 @@ namespace GenToolsForWpf
         public MainWindow()
         {
             InitializeComponent();
-           
+            robAuto.IsChecked = true;
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
@@ -42,21 +30,28 @@ namespace GenToolsForWpf
         
         private void AppendLog(string msg)
         {
-            this.txbLog.Dispatcher.Invoke(new AddLogDelegate(AppendLogAction), msg);
+            this.txbLog.Dispatcher.Invoke(
+                new Action(
+                    delegate
+                    {
+                        if (this.txbLog.Text != null)
+                        {
+                            this.txbLog.AppendText(msg + "\r\n");
+                            //随着内容的增加文本框移动到最下行
+                            this.txbLog.ScrollToLine(this.txbLog.LineCount - 1);
+                        }
+                        else
+                        {
+                            this.txbLog.Text = null;
+                        }
+                    }));
         }
 
-        /// <summary>
-        /// 写日志
-        /// </summary>
-        /// <param name="s"></param>
-        public void AppendLogAction(string s)
-        {
-            this.txbLog.AppendText(s + "\r\n");
-        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+           //Close();
+            AppendLog("1:软件默认从文件名读取源PCI，如 xxxx4-PCI444-3#电梯-DL-DT.gen  默认源PCI为444，新PCI为222\r\n即生成新文件xxxx4-PCI222-3#电梯-DL-DT.gen\r\n2：如果模式选择为“填写为准”，那源PCI以填写为准，生成的新文件为xxxx4-PCI444-3#电梯-DL-DT-new.gen");
         }
 
         private void btnRun_Click(object sender, RoutedEventArgs e)
@@ -68,12 +63,29 @@ namespace GenToolsForWpf
                 int sourcePci = Convert.ToInt32(txbSourcePci.Text);
                 int newpci = Convert.ToInt32(txbNewPci.Text);
                 pci = new PciHelper(sourcePci, newpci);
+                if (robAuto.IsChecked == true)
+                {
+                    gp.IsSource = true;
+                }
+                else
+                {
+                    gp.IsSource = false;
+                }
                 gp.pcihelper = pci;
                 Thread th = new Thread(gp.Run)
                 {
                     IsBackground = true
                 };
-                th.Start();
+                try
+                {
+                    th.Start();
+                }
+                catch (Exception exception)
+                {
+                    AppendLog("运行时出错！已终止，错误原因："+exception.Message);
+                }
+      
+     
             }
             
         }

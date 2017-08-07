@@ -15,6 +15,13 @@ namespace GenToolsForWpf.Class
         readonly AddLogDelegate _appendLog;
         private readonly List<StringBuilder> datalist = new List<StringBuilder>();
 
+        #region Documentation -----------------------------------------------------------------------------
+        /// <summary>   是否智能识别PCI. </summary>
+        ///
+        /// <value> True if this object is source, false if not. </value>
+        #endregion
+
+        public bool IsSource { get; set; }
         /// <summary>
         /// 文件目录
         /// </summary>
@@ -89,14 +96,18 @@ namespace GenToolsForWpf.Class
         private void SaveData(int i)
         {
           string name=Path.GetFileName(Filenames[i]);
-            if (name.Contains(pcihelper.OldPciStr))
+            if (IsSource)
             {
-                name =filePath + @"\" + name.Replace(pcihelper.OldPciStr, pcihelper.NewPciStr);
+                if (name.Contains(pcihelper.OldPciStr))
+                {
+                    name = filePath + @"\" + name.Replace(pcihelper.OldPciStr, pcihelper.NewPciStr);
+                }
+                else
+                {
+                    name = filePath + "PCI-" + pcihelper.OldPciStr + name;
+                }
             }
-            else
-            {
-                name= filePath + "PCI-" + pcihelper.OldPciStr + name;
-            }
+          
             FileHelper.Save(name, datalist[i]);
             _appendLog("Save to\t"+name+"\n");
         }
