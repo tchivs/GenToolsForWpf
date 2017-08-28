@@ -24,8 +24,7 @@ namespace GenToolsForWpf
         {
             txbLog.Clear();
             gp = new GenProcess(AppendLog);
-            txbSourcePci.Text=
-            PciHelper.GetPci(gp.Filenames[0]);
+            if(gp.Filenames!=null)txbSourcePci.Text= PciHelper.GetPci(gp.Filenames[0]);
         }
         
         private void AppendLog(string msg)

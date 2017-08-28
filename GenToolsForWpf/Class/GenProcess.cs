@@ -37,7 +37,8 @@ namespace GenToolsForWpf.Class
         {
             this._appendLog = appendLog;
             this.Filenames=  FileHelper.OpenFile();
-            ShowFileName();
+            if(Filenames!=null) ShowFileName();
+
         }
 
         /// <summary>

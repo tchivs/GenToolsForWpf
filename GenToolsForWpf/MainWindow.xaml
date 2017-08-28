@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenToolsForWpf"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" Title="GenProcess" Height="350" Width="525" Background="#FF007ACC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" WindowStyle="ToolWindow">
+        WindowStartupLocation="CenterScreen" Title="GenProcess V1.2" Height="350" Width="525" Background="#FF007ACC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" WindowStyle="ToolWindow">
     <Grid>
 
         <Grid Name="MainGrid" >
